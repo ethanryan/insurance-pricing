@@ -24,7 +24,12 @@ form.addEventListener("submit", function(evt) {
 
 function addResultToPage(user, price) {
   var resultDiv = document.getElementById('result');
-  let outputMessage = `${user.name}, your annual life insurance policy estimate is: ${price}.` //NOTE: fix if age is under 18...
+  let outputMessage
+  if (isNaN(price)) {
+    outputMessage = errorMessage
+  } else {
+    outputMessage = `${user.name}, your annual life insurance policy estimate is: ${price}. That's a lot of tacos!` //NOTE: fix if age is under 18...
+  }
   resultDiv.innerText = outputMessage
 }
 
@@ -56,6 +61,9 @@ function getCheckedRadioValue(name) {
 /* function refreshPage(){
 window.location.reload();
 }  */
+
+//making this a global variable for now
+const errorMessage = "ERROR! Must be over 18 to purchase this life insurance policy. Sorry!"
 
 
 //class
@@ -90,7 +98,7 @@ var brad = new User('Brad', 20, 'male', 'false', 'false', 'true')
 
 function applyAgePremium(price, user) {
   const baseAge = 18
-  const errorMessage = "ERROR! Must be over 18 to purchase this life insurance policy. Sorry!"
+  // const errorMessage = "ERROR! Must be over 18 to purchase this life insurance policy. Sorry!"
   if (user.age < baseAge) {
     return errorMessage
   } else {
