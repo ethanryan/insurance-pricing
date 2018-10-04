@@ -16,8 +16,17 @@ form.addEventListener("submit", function(evt) {
   evt.preventDefault();
   let user = createNewUserFromForm()
   console.warn('user is: ', user)
+  let price = getPrice(user)
+  console.warn('price is: ', price)
+  addResultToPage(user, price)
   //fillArray();
 });
+
+function addResultToPage(user, price) {
+  var resultDiv = document.getElementById('result');
+  let outputMessage = `${user.name}, your annual life insurance policy estimate is: ${price}.` //NOTE: fix if age is under 18...
+  resultDiv.innerText = outputMessage
+}
 
 function createNewUserFromForm() {
   let name = getInputValueById('name')
@@ -26,7 +35,7 @@ function createNewUserFromForm() {
   let allergies = getCheckedRadioValue('allergies')
   let sleep_apnea = getCheckedRadioValue('sleep_apnea')
   let heart_disease = getCheckedRadioValue('heart_disease')
-  var newUser = new User(name, 50, gender, allergies, sleep_apnea, heart_disease)
+  var newUser = new User(name, age, gender, allergies, sleep_apnea, heart_disease)
   return newUser
 }
 
