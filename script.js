@@ -28,7 +28,7 @@ function addResultToPage(user, price) {
   if (isNaN(price)) {
     outputMessage = errorMessage
   } else {
-    outputMessage = `${user.name}, your annual life insurance policy estimate is: ${price}. That's a lot of tacos!` //NOTE: fix if age is under 18...
+    outputMessage = `${user.name}, your annual life insurance policy estimate is: ${price}. That's a lot of tacos!`
   }
   resultDiv.innerText = outputMessage
 }
