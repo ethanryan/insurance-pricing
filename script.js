@@ -56,6 +56,8 @@ class User {
   }
 }
 
+//pricing engine NOTE: all below could be moved to a backend api...
+
 // var em = new User('em', 23, 'male', 'false')
 // var bob = new User('bob', 29, 'male', 'true')
 // var susan = new User('susan', 87, 'female', 'false')
@@ -64,57 +66,62 @@ class User {
 // console.log('bob is: ', bob)
 // console.log('susan is: ', susan)
 
+
 var kelly = new User('Kelly', 50, 'female', 'true', 'false', 'false')
 var josh = new User('Josh', 40, 'male', 'false', 'true', 'false')
 var brad = new User('Brad', 20, 'male', 'false', 'false', 'true')
 
 
-function getPrice(user) {
-  console.log('getPrice, user is: ', user)
-  const baseCost = 100
+function applyAgePremium(price, user) {
   const baseAge = 18
-
-  let price = baseCost
-  console.log('price is now: ', price)
-
+  const errorMessage = "ERROR! Must be over 18 to purchase this life insurance policy. Sorry!"
   if (user.age < baseAge) {
-    return "ERROR! Must be over 18 to purchase this life insurance policy. Sorry!"
+    return errorMessage
   } else {
     console.log(`${user.name}'s age is ${user.age}...`)
-    let ageRisk = user.age - baseAge //if 18, x is 1; if 19, x is 2...
-    // let agePremium = Math.ceil(ageRisk/5) * 5
-
-    // let agePremium = Math.floor(ageRisk/5) * 5
+    let ageRisk = user.age - baseAge
     let agePremium = Math.floor(ageRisk/5) * 20
-
-
-    // let agePremium = 6 * 20 //NOTE: just for now!
-    // let agePremium = Math.floor(ageRisk/5)
-    // console.log('typeof agePremium is: ', typeof agePremium)
-    console.log('agePremium is: ', agePremium)
     price = price + agePremium
     console.warn('price is now: ', price)
+    return price
   }
+}
 
-  if (user.allergies === 'true') {
-    price = price * (1 + 0.01)
-    console.warn('allergies - price is now: ', price)
-  }
 
-  if (user.sleep_apnea === 'true') {
-    price = price * (1 + 0.06)
-    console.warn('sleep_apnea - price is now: ', price)
-  }
-
-  if (user.heart_disease === 'true') {
-    price = price * (1 + 0.17)
-    console.warn('heart_disease - price is now: ', price)
-  }
-
+function applyDiscounts(price, user) {
   if (user.gender === 'female') {
     price = price - 12
     console.warn('female discount - price is now: ', price)
   }
+  return price
+}
+
+
+function applyHealthPremiums(price, user) {
+  if (user.allergies === 'true') {
+    price = price * (1 + 0.01)
+    console.warn('allergies - price is now: ', price)
+  }
+  if (user.sleep_apnea === 'true') {
+    price = price * (1 + 0.06)
+    console.warn('sleep_apnea - price is now: ', price)
+  }
+  if (user.heart_disease === 'true') {
+    price = price * (1 + 0.17)
+    console.warn('heart_disease - price is now: ', price)
+  }
+  return price
+}
+
+
+function getPrice(user) {
+  console.log('getPrice, user is: ', user)
+  const baseCost = 100
+  let price = baseCost
+  console.log('price is now: ', price)
+  price = applyAgePremium(price, user)
+  price = applyHealthPremiums(price, user)
+  price = applyDiscounts(price, user)
   console.log('final price is: ', price)
   return price
 }
