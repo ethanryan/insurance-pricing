@@ -14,14 +14,21 @@ var form = document.getElementById("myForm");
 
 form.addEventListener("submit", function(evt) {
   evt.preventDefault();
-
-  console.log("name is: ", getInputValueById('name') );
-  console.log("age is: ", getInputValueById('age') );
-  //console.log("typeof Number(ageInput.value) is: ", typeof Number(ageInput.value) );
-  console.log("gender is: ", getCheckedRadioValue('gender') )
-
+  let user = createNewUserFromForm()
+  console.warn('user is: ', user)
   //fillArray();
 });
+
+function createNewUserFromForm() {
+  let name = getInputValueById('name')
+  let age = getInputValueById('age')
+  let gender = getCheckedRadioValue('gender')
+  let allergies = getCheckedRadioValue('allergies')
+  let sleep_apnea = getCheckedRadioValue('sleep_apnea')
+  let heart_disease = getCheckedRadioValue('heart_disease')
+  var newUser = new User(name, 50, gender, allergies, sleep_apnea, heart_disease)
+  return newUser
+}
 
 function getInputValueById(id) {
   var input = document.getElementById(id);
