@@ -1,6 +1,6 @@
 # insurance-pricing
 
-![insurance pricing estimator screenshot]('./assets/life-insurance-pricing-estimator.png')
+![insurance pricing estimator screenshot](assets/life-insurance-pricing-estimator.png)
 
 To view this app, simply open this folder, doubleclick the index.html file, and open it in the browser.
 
