@@ -1,15 +1,6 @@
 console.log('hello from javascript!')
-/* name(string)
-age(number)
-gender(string / binary ? )
-allergies(boolean)
-sleep_apnea(boolean)
-heart_disease(boolean) */
 
-
-// var bob  = new User('bob');
-// console.log('bob.name is: ', bob.name)
-
+//for HTML form input and output:
 var form = document.getElementById("myForm");
 
 form.addEventListener("submit", function(evt) {
@@ -19,7 +10,6 @@ form.addEventListener("submit", function(evt) {
   let price = getPrice(user)
   console.warn('price is: ', price)
   addResultToPage(user, price)
-  //fillArray();
 });
 
 function addResultToPage(user, price) {
@@ -58,16 +48,11 @@ function getCheckedRadioValue(name) {
   }
 }
 
-/* function refreshPage(){
-window.location.reload();
-}  */
-
 //making this a global variable for now
 const errorMessage = "ERROR! Must be over 18 to purchase this life insurance policy. Sorry!"
 
 
 //class
-
 class User {
   constructor(name, age, gender, allergies, sleep_apnea, heart_disease) {
     this.name = name;
@@ -76,29 +61,18 @@ class User {
     this.allergies = allergies;
     this.sleep_apnea = sleep_apnea;
     this.heart_disease = heart_disease;
-    // this.makeSound = () => `The ${this.type} named ${this.name} goes ${this.sound}!`;
   }
 }
 
-//pricing engine NOTE: all below could be moved to a backend api...
 
-// var em = new User('em', 23, 'male', 'false')
-// var bob = new User('bob', 29, 'male', 'true')
-// var susan = new User('susan', 87, 'female', 'false')
-//
-// console.log('em is: ', em)
-// console.log('bob is: ', bob)
-// console.log('susan is: ', susan)
-
+//pricing functionality
 
 var kelly = new User('Kelly', 50, 'female', 'true', 'false', 'false')
 var josh = new User('Josh', 40, 'male', 'false', 'true', 'false')
 var brad = new User('Brad', 20, 'male', 'false', 'false', 'true')
 
-
 function applyAgePremium(price, user) {
   const baseAge = 18
-  // const errorMessage = "ERROR! Must be over 18 to purchase this life insurance policy. Sorry!"
   if (user.age < baseAge) {
     return errorMessage
   } else {
@@ -111,7 +85,6 @@ function applyAgePremium(price, user) {
   }
 }
 
-
 function applyDiscounts(price, user) {
   if (user.gender === 'female') {
     price = price - 12
@@ -119,7 +92,6 @@ function applyDiscounts(price, user) {
   }
   return price
 }
-
 
 function applyHealthPremiums(price, user) {
   if (user.allergies === 'true') {
@@ -137,7 +109,6 @@ function applyHealthPremiums(price, user) {
   return price
 }
 
-
 function getPrice(user) {
   console.log('getPrice, user is: ', user)
   const baseCost = 100
@@ -146,20 +117,12 @@ function getPrice(user) {
   price = applyAgePremium(price, user)
   price = applyHealthPremiums(price, user)
   price = applyDiscounts(price, user)
-  // price = price.toFixed(2)
-  // price = Number(price.toFixed(2)) //toFixed makes it a string with only two decimal places, so turning it back into a number...
+  // price = price.toFixed(2) //toFixed makes it a string with only two decimal places
   console.log('final price is: ', price)
   return price
 }
 
-// let emPrice = getPrice(em)
-// let bobPrice = getPrice(bob)
-// let susanPrice = getPrice(susan)
-//
-// console.log('emPrice is: ', emPrice)
-// console.log('bobPrice is: ', bobPrice)
-// console.log('susanPrice is: ', susanPrice)
-
+//testing here and in InsuranceSpecRunner in testing folder...
 let kellyPrice = getPrice(kelly)
 let joshPrice = getPrice(josh)
 let bradPrice = getPrice(brad)
