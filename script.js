@@ -8,7 +8,7 @@ form.addEventListener("submit", function(evt) {
   let user = createNewUserFromForm()
   console.warn('user is: ', user)
   let price = getPrice(user)
-  console.warn('price is: ', price)
+  // console.warn('price is: ', price)
   addResultToPage(user, price)
 });
 
@@ -18,9 +18,9 @@ function addResultToPage(user, price) {
   if (isNaN(price)) {
     outputMessage = errorMessage
   } else {
-    outputMessage = `${user.name}, your annual life insurance policy estimate is: $${price}.`
+    outputMessage = `<h2>${user.name}, your annual life insurance policy estimate is: $${price}.</h2>`
   }
-  resultDiv.innerText = outputMessage
+  resultDiv.innerHTML = outputMessage
 }
 
 function createNewUserFromForm() {
@@ -110,23 +110,23 @@ function applyHealthPremiums(price, user) {
 }
 
 function getPrice(user) {
-  console.log('getPrice, user is: ', user)
+  // console.log('getPrice, user is: ', user)
   const baseCost = 100
   let price = baseCost
-  console.log('price is now: ', price)
+  console.log('base cost is: ', price)
   price = applyAgePremium(price, user)
   price = applyHealthPremiums(price, user)
   price = applyDiscounts(price, user)
-  // price = price.toFixed(2) //toFixed makes it a string with only two decimal places
+  price = price.toFixed(2) //toFixed makes it a string with only two decimal places
   console.log('final price is: ', price)
   return price
 }
 
 //testing here and in InsuranceSpecRunner in testing folder...
-let kellyPrice = getPrice(kelly)
-let joshPrice = getPrice(josh)
-let bradPrice = getPrice(brad)
-
-console.log('kellyPrice is: ', kellyPrice)
-console.log('joshPrice is: ', joshPrice)
-console.log('bradPrice is: ', bradPrice)
+// let kellyPrice = getPrice(kelly)
+// let joshPrice = getPrice(josh)
+// let bradPrice = getPrice(brad)
+//
+// console.log('kellyPrice is: ', kellyPrice)
+// console.log('joshPrice is: ', joshPrice)
+// console.log('bradPrice is: ', bradPrice)
