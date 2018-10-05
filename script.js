@@ -28,7 +28,7 @@ function addResultToPage(user, price) {
   if (isNaN(price)) {
     outputMessage = errorMessage
   } else {
-    outputMessage = `${user.name}, your annual life insurance policy estimate is: ${price}. That's a lot of tacos!`
+    outputMessage = `${user.name}, your annual life insurance policy estimate is: $${price}.`
   }
   resultDiv.innerText = outputMessage
 }
@@ -146,6 +146,8 @@ function getPrice(user) {
   price = applyAgePremium(price, user)
   price = applyHealthPremiums(price, user)
   price = applyDiscounts(price, user)
+  // price = price.toFixed(2)
+  // price = Number(price.toFixed(2)) //toFixed makes it a string with only two decimal places, so turning it back into a number...
   console.log('final price is: ', price)
   return price
 }
